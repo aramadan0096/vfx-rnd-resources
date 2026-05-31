@@ -1,1 +1,123 @@
-Technical Reference and Resource Directory for VFX Pipeline R&DA curated, production-ready directory of standardized open-source scene assets, multi-channel render passes, deep EXR datasets, camera raw footage, and core utility tools for VFX pipeline research, development, and system benchmarking.Table of Contents1.(#1-standard-production-scene-assets--usdgltf-datasets)2.(#2-cg-multi-channel-render-passes--compositing-sequences)3.(#3-deep-exr-datasets-toolsets--specifications)4.(#4-cinematography-camera-raw-footage)5.(#5-pipeline-standards-color-management--math-utilities)6.(#6-pipeline-validation-real-time-vp--tracking-toolsets)1. Standard Production Scene Assets & USD/glTF DatasetsThese production-grade datasets are designed to evaluate scene graph scale, validate Universal Scene Description (USD) composition schemas, and stress-test offline/real-time rendering engines under heavy computational load.Dataset NamePrimary FormatData Volume / RAM TargetCore Pipeline FocusRepository / Download LinkDisney Moana Island SceneUSD / OpenVDB45 GB (Uncompressed Scene) Heavy geometric scale, procedurals, volumetric path-tracing stress tests (https://github.com/usd-wg/assets) Animal Logic ALab SceneUSD63.4 GB (4K Textures) Skeletal animations, character cycles, procedural fur, Hydra rendering tests (https://dpel.aswf.io/alab/)  | Animal Logic Official Intel 4004 Moore LaneUSDMedium / Instanced Veg. Light transport challenges, noise-sampling diagnostics, plant instancing (https://dpel.aswf.io/) Intel Sponza Base SceneUSD / OBJUncompressed textures Architectural global illumination, PBR material stress testing (https://www.intel.com/content/www/us/en/content-details/830833/sponza-base-scene.html) Intel Sponza glTF 2.0glTF 2.0Cleaned PNG Textures Real-time WebGL/WebGPU physically based rendering (PBR) testing (https://github.com/ludicon/sponza-gltf)  | gltf-tex CLI Utility Khronos Sponza AtriumglTF 2.0Tangent-Space normal maps Real-time shading models, metallic-roughness texture channel layout packing (https://github.com/KhronosGroup/glTF-Sample-Assets/blob/main/Models/Sponza/README.md) Pixar Standard Scene SetsUSDLightweightSyntax validation, composition rules, character skeletal weights (https://openusd.org/release/dl_downloads.html) Lowe's Open BuilderUSDZ500+ CAD-to-USDZ Assets Real-time asset performance, CAD ingestion pipelines, mobile AR validations (https://github.com/matiascodesal/awesome-openusd) Open Chess SetglTF / MaterialXStandard Surface BxDFHorizontal material layering, vertical PBR node assignments, lookdev exchange(https://github.com/AcademySoftwareFoundation/MaterialX)2. CG Multi-Channel Render Passes & Compositing SequencesMulti-channel EXR sequences storing Arbitrary Output Variables (AOVs), Light Path Expressions (LPEs), and Cryptomattes are essential for building robust ingestion, look development, and compositing pipelines.Netflix's Sole Mates Dataset (ASWF DPEL) Description: A complete 61-frame production shot consisting of 42 distinct render layers containing environment, character, and volume elements.Data Volume: 105 GB (Full Multi-Pass package).Formats: 16-bit half-precision multi-pass OpenEXR sequences in ACEScg working space, along with final graded ProRes 422 HQ (SDR) and ProRes 4444 XQ (HDR) reference plates.Technical Features: Over 40 diagnostic, utility, and lighting passes (including world position P, normals N, motion vectors, denoise passes, sample rates, and relative JSON-hashed sidecar Cryptomattes).Primary Repository:(https://github.com/DigitalProductionExampleLibrary/SoleMates) Pixar RenderMan Stirling VFX Project Description: An 11 GB complete look-development, lighting, and compositing pipeline project designed to validate real-world plate integration.Software Targets: Autodesk Maya, Pixar RenderMan, and Foundry Nuke. Includes interactive sticky-note breakdown of 3D card projections, rotoscopy practices, and LPE overrides.Primary Repository:(https://renderman.pixar.com/stirling-vfx)  |(https://renderman.pixar.com/learn_tutorials)Hollywood Camera Work Tracking PlatesDescription: Extensive database of high-quality HD green screen tracking plates, live-action matchmoving plates, object trackers, and witness camera sequences.Technical Specs: 1080p and 720p footage in native camera resolutions (HVX-200 DVCPROHD) with associated 3D scene data (such as fully tracked Maya scenes, ambient occlusion passes, hard shadow passes, and tracking marker patch templates).Primary Repository:(https://www.hollywoodcamerawork.com/tracking-plates.html) |(https://cgpress.org/archives/free_green_screen_and_vfx_plates_for_personal_training.html)OpenTimelineIO Open Content Footage Examples Description: Production-quality source footage in multiple formats, frame rates, and high resolutions designed to test editorial/VFX timeline pipelines.Primary Repository:(https://github.com/darbyjohnston/otio-oc-examples)  |(https://aswf-dpel-assets.s3.amazonaws.com/asc-stem2/ASC_StEM2_178_UHD_ST2084_1000nits_Rec2020_Stereo_ProRes4444XQ.mov) 3. Deep EXR Datasets, Toolsets, & SpecificationsDeep images contain a variable-length list of color, opacity, and depth samples per pixel, which is necessary for volumetric compositing. The resources below provide reference files and software tools for deep pipeline integration.Official OpenEXR Deep & Multipart Reference Images Hosted within the Academy Software Foundation’s assets directories, these test files serve as unit-tests for deep-channel parsing, stereo alignments, and boundary-window validation.Leaves.exr (Stereo Deep Multi-Part): 2 parts, 28 channels, deepscanline, ZIPs compression.20 Trunks.exr (Stereo Deep Multi-Part): 2 parts, 28 channels, deepscanline, ZIPs compression.20 composited.exr (Multipart Flat Technical Passes): 4 parts, 53 channels, scanlineimage, ZIPs.20 Balls.exr (Deep Single-Part Left-Eye): 1 part, 1 channel, deepscanline, ZIPs.20 Ground.exr (Deep Single-Part Left-Eye Low-Res): $1024\times 576$ decimated coordinates parser test.20 singlepart.0007.exr & singlepart.0008.exr (Data Window Test): Validates boundary cropping when dataWindow extends outside displayWindow bounds.20  |(https://raw.githubusercontent.com/AcademySoftwareFoundation/openexr-images/main/Beachball/singlepart.0008.jpg) Primary Code Repository:(https://github.com/AcademySoftwareFoundation/openexr) Deep EXR Production Tools & APIsDeepThinner v2.0 (Foundry Nuke Plugin): Thread-safe Nuke 16+ plugin written by Marty Blumen. Optimizes deep data and cuts file sizes by performing occlusion culling, contribution thresholding, volumetric collapse, and color-aware Z-merging.22  |(https://github.com/bratgot/DeepThinner) exrflatten (Deep Object ID Extractions): Command-line utility that extracts individual 2D layers from deep EXR files based on object ID channels, creating flat 32-bit Photoshop-compatible layouts with matching masks.23 Exr-IO (Photoshop Plugin): Free image reader/writer that extracts all image channels, deep sample ranges, and Cryptomattes into Photoshop layers.24, 23 |(https://superrendersfarm.com/article/exr-io-cryptomatte-guide) TinyEXR.NET (C# Programmatic Wrapper): Managed.NET library providing single-part, tiled, multi-part, and deep EXR load capability (LoadDeepEXR) for custom pipeline verification and asset inspector toolsets.7 HDR/EXR 360 Viewer (VS Code Extension): Integrated editor view supporting direct inspection of HDR/EXR linear image metadata and exposure levels.25, 20 4. Cinematography Camera Raw FootageTo research debayering algorithms, metadata extraction, and ingestion automation, pipeline engineers require access to native, uncompressed camera original clips.ARRI Camera Systems (ARRIRAW & Apple ProRes) All assets include active Lens Data System (LDS-1 or LDS-2) metadata headers, embedding focus, iris, and focal length parameters.ARRI official Sample Footage Portal: High Density Encoding (HDE / .arx), ARRIRAW, and ProRes templates.27, 28  |(https://www.arri.com/resource/blob/31926/fea9a24f3fe7b77d5f83b49700465f76/2025-03-arri-sample-footage-technical-information-data.pdf) Direct FTP Access Credentials:Server: ftp2.arri.de Usernames: ALEXA (for camera systems) | AMIRA (for documentary systems) Password: samplefootage RED Digital Cinema (REDCODE RAW .R3D) Constant quality and constant bitrate wavelet-based compression clips designed for internal pipeline development.Nikon USA Z-Cinema Downloads: Features fully bundled, high-resolution .R3D test packages for V-RAPTOR [X] 8K VV and KOMODO-X (including chroma keys, skin-tone test couples, and reference LUT targets).31, 33 RED Official Downloads: Manufacturer directory of original .R3D clips. Legal Note: Footage is provided strictly "as is" under RED copyright for internal testing only.(https://www.red.com/downloads) |(https://support.red.com/hc/en-us/articles/360021857073-Sample-R3D-Files) Sony Cinematography (16-bit MXF X-OCN) High-resolution, compact 16-bit linear camera originals capturing the Venice 2 8.6K sensor capabilities.Sony Ci Platform Ingestion: Direct download of Venice 2 8K scan mode tests with optional high-speed Aspera transfer support.35 Blackmagic Design (Blackmagic RAW .braw) Cross-platform, royalty-free GPU-accelerated codec test files.URSA Cine 17K 65 Gallery: Large-format 65mm sensor original files (Q1, 8K open gate Cooke Panchro).32 Blackmagic Cinema Camera 6K Gallery: Open Gate 6K full-frame sensor original files (Constant Bitrate 3:1).11 URSA Cine Immersive Gallery: Dual-camera 180° field-of-view immersive 3D clips (AIVU universal format) for Apple Vision Pro and DaVinci Resolve 20+ pipeline development.11 Blackmagic RAW SDK & Reference Samples: Quick download of standard testing clips (The Hacker, Asian Umbrella Roof).32 |(https://www.blackmagicdesign.com/products/blackmagicraw) 5. Pipeline Standards, Color Management, & Math UtilitiesPipeline foundations depend on uniform implementations of open standards for color, volumetric storage, and material graphs.OpenColorIO-Config-ACES (ASWF Core)Description: Official Python environment designed for automated, spreadsheet-driven generation of ACEScg, Reference, and Studio configurations.Primary Repository:(https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES) |(https://github.com/analogstudio/OpenColorIO-Config-ACES-releases) |(https://github.com/colour-science/OpenColorIO-Configs)OpenVDB Volumetric Models (ASWF Core) Description: Volumetric representations of familiar computational models (Armadillo, Bunny, Space arrays, and explosions) along with toolkit scene setups for Houdini, Maya, and Mathematica.Primary Repository:(https://www.openvdb.org/download/) |(https://github.com/AcademySoftwareFoundation/openvdb) |(https://artifacts.aswf.io/io/aswf/openvdb/models/bunny_cloud.vdb/1.0.0/bunny_cloud.vdb-1.0.0.zip)MaterialX Project Standard (ASWF Core)Description: Open standard for the vertical description and exchange of look-development material graphs, textures, and shading networks across diverse host DCCs.Primary Repository:(https://github.com/AcademySoftwareFoundation/MaterialX) |(https://materialx.org/DeveloperReference.html) |(https://github.com/AcademySoftwareFoundation/MaterialX/releases)QuiltiX Node Editor (MaterialX & USD)Description: Open-source graphical node editor designed to author and edit MaterialX shaders with an integrated Hydra viewport.Primary Repository: Prism Pipeline QuiltiX GitHub6. Pipeline Validation, Real-Time VP, & Tracking ToolsetsPractical assets and scripts required to build live-action integration testbeds, virtual production syncs, and scene linter tasks.Blender Studio Open Film Demo FilesDescription: Full-scale production assets, splash artwork, cycles lighting test beds, and character pose libraries from Open Movies like Charge and Sprite Fright.Primary Repository:(https://www.blender.org/download/demo-files/) |(https://www.blender.org/download/)Tracking Toolkit for Blender Description: OpenXR integration extension designed to live-track 6-DOF motion controller poses directly into the 3D viewport, outputting aligned SMPTE timecode sequences.Primary Repository:(https://extensions.blender.org/add-ons/tracking-toolkit/)Core Specifications OverviewColor Spaces: Linear RGB data exchange relies on the ACES AP0 space (ACES2065-1 container). Active CG render pipelines and compositing working directories utilize ACES AP1 primaries (ACEScg) to avoid saturation clipping.Deep Hashing: The standard Deep ID specification leverages $32\text{-bit}$ or $64\text{-bit}$ unsigned integer (UINT) channels to store direct object hashes inside the core EXR scanline stream rather than multi-file sidecars.VP Phase Alignment: Synchronization across LED volumes and physical cameras relies on sub-frame phase-locked frequencies modeled as $N\times$ the native camera frame rate (where $N$ is the number of active frustum cameras).
+# Technical Reference and Resource Directory for VFX Pipeline R&D
+
+A curated, production-ready directory of standardized open-source scene assets,
+multi-channel render passes, deep EXR datasets, camera raw footage, and core
+utility tools for VFX pipeline research, development, and benchmarking.
+
+Any contribution is welcome.
+
+# Summary
+
+- [Technical Reference and Resource Directory for VFX Pipeline R&D](#technical-reference-and-resource-directory-for-vfx-pipeline-rd)
+- [Summary](#summary)
+  - [Standard Production Scene Assets and USD/glTF Datasets](#standard-production-scene-assets-and-usdgltf-datasets)
+  - [CG Multi-Channel Render Passes and Compositing Sequences](#cg-multi-channel-render-passes-and-compositing-sequences)
+  - [Deep EXR Datasets, Toolsets, and Specifications](#deep-exr-datasets-toolsets-and-specifications)
+  - [Cinematography Camera Raw Footage](#cinematography-camera-raw-footage)
+  - [Pipeline Standards, Color Management, and Math Utilities](#pipeline-standards-color-management-and-math-utilities)
+  - [Pipeline Validation, Real-Time VP, and Tracking Toolsets](#pipeline-validation-real-time-vp-and-tracking-toolsets)
+  - [Core Specifications Overview](#core-specifications-overview)
+
+## Standard Production Scene Assets and USD/glTF Datasets
+
+These production-grade datasets are useful for evaluating scene graph scale,
+validating USD composition schemas, and stress-testing offline and real-time
+rendering engines.
+
+* [Disney Moana Island Scene](https://github.com/usd-wg/assets) - USD/OpenVDB, large-scale geometry, procedural content, and volumetric path-tracing tests.
+* [Animal Logic ALab Scene](https://dpel.aswf.io/alab/) - 63.4 GB with 4K textures, skeletal animation, fur workflows, and Hydra rendering tests.
+* [Intel 4004 Moore Lane](https://dpel.aswf.io/) - Instanced vegetation and light transport sampling diagnostics.
+* [Intel Sponza Base Scene](https://www.intel.com/content/www/us/en/content-details/830833/sponza-base-scene.html) - USD/OBJ architecture scene for GI and PBR stress testing.
+* [Intel Sponza glTF 2.0](https://github.com/ludicon/sponza-gltf) - Clean real-time glTF package for WebGL/WebGPU PBR testing.
+* [Khronos Sponza Atrium](https://github.com/KhronosGroup/glTF-Sample-Assets/blob/main/Models/Sponza/README.md) - Reference for glTF metallic-roughness texture packing and shading behavior.
+* [Pixar Standard Scene Sets](https://openusd.org/release/dl_downloads.html) - Lightweight USD samples for syntax and composition validation.
+* [Lowe's Open Builder](https://github.com/matiascodesal/awesome-openusd) - CAD-to-USDZ assets for AR and mobile performance validation.
+* [Open Chess Set / MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) - Useful for lookdev exchange and shader/material graph validation.
+
+## CG Multi-Channel Render Passes and Compositing Sequences
+
+Multi-channel EXR sequences with AOVs, LPEs, and Cryptomattes are essential for
+ingestion, lookdev, and compositing pipeline validation.
+
+* [Netflix Sole Mates Dataset (ASWF DPEL)](https://github.com/DigitalProductionExampleLibrary/SoleMates) - 61-frame production shot package with 42 render layers and more than 40 diagnostic/lighting passes in ACEScg.
+* [Pixar RenderMan Stirling VFX](https://renderman.pixar.com/stirling-vfx) - Lookdev, lighting, and compositing sample project for Maya, RenderMan, and Nuke.
+* [RenderMan Tutorials](https://renderman.pixar.com/learn_tutorials) - Supporting learning material for the Stirling workflows.
+* [Hollywood Camera Work Tracking Plates](https://www.hollywoodcamerawork.com/tracking-plates.html) - HD green-screen, matchmove, and witness camera footage with related scene data.
+* [CGPress Tracking Plate Reference](https://cgpress.org/archives/free_green_screen_and_vfx_plates_for_personal_training.html) - Additional pointer to free training plates.
+* [OpenTimelineIO Open Content Examples](https://github.com/darbyjohnston/otio-oc-examples) - Mixed-format footage for editorial and timeline pipeline testing.
+* [ASC StEM2 Sample (ASWF DPEL)](https://aswf-dpel-assets.s3.amazonaws.com/asc-stem2/ASC_StEM2_178_UHD_ST2084_1000nits_Rec2020_Stereo_ProRes4444XQ.mov) - UHD reference clip for finishing and playback validation.
+
+## Deep EXR Datasets, Toolsets, and Specifications
+
+Deep images store variable-length per-pixel sample lists (color, opacity,
+depth). They are essential for volumetric compositing and deep holdout workflows.
+
+Official reference images and code:
+
+* [OpenEXR](https://github.com/AcademySoftwareFoundation/openexr) - Primary code repository with deep and multipart support.
+* [OpenEXR Images - Beachball Sample Preview](https://raw.githubusercontent.com/AcademySoftwareFoundation/openexr-images/main/Beachball/singlepart.0008.jpg) - Reference image asset example.
+
+Common deep EXR production tools:
+
+* [DeepThinner v2.0](https://github.com/bratgot/DeepThinner) - Nuke plugin for deep data reduction via culling, thresholding, and depth-aware merges.
+* exrflatten - Command-line deep ID extraction workflow for flat layer outputs.
+* [Exr-IO Cryptomatte Guide](https://superrendersfarm.com/article/exr-io-cryptomatte-guide) - Practical workflow reference for channel extraction into Photoshop.
+* TinyEXR.NET - Managed .NET wrapper for single-part, tiled, multipart, and deep EXR loading.
+* HDR/EXR 360 Viewer (VS Code extension) - In-editor HDR/EXR inspection support.
+
+## Cinematography Camera Raw Footage
+
+Raw camera originals are useful for debayering research, metadata extraction,
+ingestion automation, and codec performance testing.
+
+ARRI camera systems (ARRIRAW and Apple ProRes):
+
+* [ARRI Technical Information PDF](https://www.arri.com/resource/blob/31926/fea9a24f3fe7b77d5f83b49700465f76/2025-03-arri-sample-footage-technical-information-data.pdf)
+* ARRI sample footage FTP:
+  * Server: ftp2.arri.de
+  * Username(s): ALEXA, AMIRA
+  * Password: samplefootage
+
+RED Digital Cinema (.R3D):
+
+* [RED Downloads](https://www.red.com/downloads)
+* [Sample R3D Files](https://www.red.com/sample-r3d-files)
+
+Sony cinematography (16-bit MXF X-OCN):
+
+* Sony Ci platform downloads are commonly used for Venice 2 ingestion tests.
+
+Blackmagic Design (.braw):
+
+* [Blackmagic RAW SDK and Sample Clips](https://www.blackmagicdesign.com/products/blackmagiccinemacamera/gallery)
+
+## Pipeline Standards, Color Management, and Math Utilities
+
+Pipeline foundations depend on reliable open standards for color, volumetrics,
+material interchange, and scene data semantics.
+
+* [OpenColorIO Config ACES](https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES) - Official ACES-oriented OCIO config generation workflows.
+* [OpenColorIO Config ACES Releases](https://github.com/analogstudio/OpenColorIO-Config-ACES-releases) - Prebuilt and release-oriented config packages.
+* [Colour Science OpenColorIO Configs](https://github.com/colour-science/OpenColorIO-Configs) - Community and research OCIO config variants.
+* [OpenVDB Downloads](https://www.openvdb.org/download/) - Volumetric model and toolkit resources.
+* [OpenVDB Repository](https://github.com/AcademySoftwareFoundation/openvdb) - Core source and integration reference.
+* [OpenVDB Bunny Cloud Artifact](https://artifacts.aswf.io/io/aswf/openvdb/models/bunny_cloud.vdb/1.0.0/bunny_cloud.vdb-1.0.0.zip) - Example volumetric validation asset.
+* [MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) - Material graph and lookdev interchange standard.
+* [MaterialX Developer Reference](https://materialx.org/DeveloperReference.html) - API and specification details.
+* [MaterialX Releases](https://github.com/AcademySoftwareFoundation/MaterialX/releases) - Versioned binaries and source drops.
+
+## Pipeline Validation, Real-Time VP, and Tracking Toolsets
+
+Practical assets and tooling for live-action integration tests, virtual
+production sync, and scene validation.
+
+* [Blender Demo Files](https://www.blender.org/download/demo-files/) - Open film assets and lighting testbeds.
+* [Blender Downloads](https://www.blender.org/download/) - Main download portal and related production files.
+* [Tracking Toolkit for Blender](https://extensions.blender.org/add-ons/tracking-toolkit/) - OpenXR-based motion controller tracking into Blender viewports.
+
+## Core Specifications Overview
+
+* Color spaces: Linear exchange typically uses ACES AP0 (ACES2065-1), while CG rendering and compositing generally use ACES AP1 (ACEScg).
+* Deep hashing: Deep ID workflows often use 32-bit or 64-bit unsigned integer channels for object hash storage directly in EXR streams.
+* VP phase alignment: LED volume and camera sync commonly relies on sub-frame phase-locking modeled as N times the native camera frame rate.
+
