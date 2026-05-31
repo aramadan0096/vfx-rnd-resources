@@ -1,257 +1,70 @@
-# Awesome CG / VFX Pipeline
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+Technical Reference and Resource Directory for VFX Pipeline R&D
 
-List of open-source technologies that help in the process of building a
-pipeline for CG or VFX productions.
+A curated, production-ready directory of standardized open-source scene assets, multi-channel render passes, deep EXR datasets, camera tracks, lens grids, OCIO/ACES color configs, USD scenes, geometry caches, benchmark shots, validation fixtures, and pipeline tooling references for visual effects research and development.
 
-Any contribution is welcome!
+This repository is intended to support:
+
+- rendering and compositing experiments
+- color pipeline validation
+- USD and DCC interoperability testing
+- asset ingestion and publishing workflows
+- benchmarking and regression testing
+- dataset discovery for VFX pipeline R&D
 
 ## Summary
 
-- [Digital Content Creation Software (DCCs)](#digital-content-creation-software-dccs)
-  - [2D](#2d)
-  - [Animation](#animation)
-  - [3D](#3d)
-  - [3D realtime engines](#3d-realtime-engines)
-  - [Audio](#audio)
-  - [Rendering Engines](#rendering-engines)
-  - [Photogrammetry](#photogrammetry)
-  - [3D Scanning & Point Cloud Tools](#3d-scanning--point-cloud-tools)
-  - [Photography](#photography)
-  - [Video](#video)
-  - [UV/Unwrap library](#uvunwrap-library)
-  - [Tools](#tools)
-  - [Low-code platforms](#low-code-platforms)
-  - [Writing](#writing)
-- [Libraries](#libraries)
-  - [File path](#file-path)
-  - [UI](#ui)
-  - [CG Software API](#cg-software-api)
-  - [Geometry](#geometry)
-    - [Remeshing](#remeshing)
-  - [Colors](#colors)
-  - [Shaders](#shaders)
-  - [Denoising](#denoising)
-- [File formats](#file-formats)
-  - [USD](#usd)
-- [File transfer](#file-transfer)
-- [Job schedulers](#job-schedulers)
-- [Package managers](#package-managers)
-  - [Environment Manager](#environment-manager)
-- [Asset managers](#asset-managers)
-- [Production managers](#production-managers)
-- [Content validation](#content-validation)
-- [Docker images](#docker-images)
-  - [Misc](#misc)
-- [Plugins](#plugins)
-- [IDE](#ide)
-  - [PyCharm](#pycharm)
-  - [SublimeText](#sublimetext)
-  - [vim](#vim)
-  - [VSCode](#vscode)
-  - [VSCodium](#vscodium)
-  - [vscode.dev](#vscodedev)
-- [Databases](#databases)
-  - [Graph](#graph)
-  - [Relational](#relational)
-  - [Document-based](#document-based)
-- [Monitoring Web Services](#monitoring-web-services)
-- [Communities](#communities)
-- [Resources / Tutorials](#resources--tutorials)
-- [Free music for showreel](#free-music-for-showreel)
+- [Scenes & Assets](#scenes--assets)
+- [Images & Plates](#images--plates)
+- [Render Passes & AOVs](#render-passes--aovs)
+- [Deep Data](#deep-data)
+- [Geometry & Caches](#geometry--caches)
+- [USD / Alembic / OpenEXR / OCIO / ACES](#usd--alembic--openexr--ocio--aces)
+- [Tracking & Calibration](#tracking--calibration)
+- [Benchmarks & Validation](#benchmarks--validation)
+- [Pipeline Tooling & Libraries](#pipeline-tooling--libraries)
+- [Reference Collections](#reference-collections)
+- [Communities & Learning Resources](#communities--learning-resources)
 
-## Digital Content Creation Software (DCCs)
+## Scenes & Assets
 
-### 2D
+- Add scene packages, hero assets, lookdev turntables, and lighting test scenes here.
 
-- Add your entries here.
+## Images & Plates
 
-#### Animation
+- Add open plates, HDRIs, texture references, matte painting sources, and photography datasets here.
 
-- Add your entries here.
+## Render Passes & AOVs
 
-### 3D
+- Add multilayer EXRs, beauty/utility passes, cryptomattes, and compositor test frames here.
 
-- Add your entries here.
+## Deep Data
 
-### 3D realtime engines
+- Add deep EXR datasets, holdout tests, and deep compositing fixtures here.
 
-- Add your entries here.
+## Geometry & Caches
 
-### Audio
+- Add Alembic caches, point clouds, USD geometry, simulation caches, and deformation test assets here.
 
-- Add your entries here.
+## USD / Alembic / OpenEXR / OCIO / ACES
 
-### Rendering Engines
+- Add format-specific samples, interchange fixtures, and color-management configs here.
 
-- Add your entries here.
+## Tracking & Calibration
 
-### Photogrammetry
+- Add camera tracks, lens grids, distortion charts, STMaps, and matchmove references here.
 
-- Add your entries here.
+## Benchmarks & Validation
 
-### 3D Scanning & Point Cloud Tools
+- Add reproducible benchmark scenes, golden outputs, checksum manifests, and CI validation fixtures here.
 
-- Add your entries here.
+## Pipeline Tooling & Libraries
 
-### Photography
+- Add links to tools, parsers, converters, validators, and automation helpers here.
 
-- Add your entries here.
+## Reference Collections
 
-### Video
+- Add links to external datasets, archive indexes, and open-source sample repositories here.
 
-- Add your entries here.
+## Communities & Learning Resources
 
-### UV/Unwrap library
-
-- Add your entries here.
-
-### Tools
-
-- Add your entries here.
-
-### Low-code platforms
-
-- Add your entries here.
-
-### Writing
-
-- Add your entries here.
-
-## Libraries
-
-### File path
-
-- Add your entries here.
-
-### UI
-
-- Add your entries here.
-
-### CG Software API
-
-- Add your entries here.
-
-### Geometry
-
-- Add your entries here.
-
-#### Remeshing
-
-- Add your entries here.
-
-### Colors
-
-- Add your entries here.
-
-### Shaders
-
-- Add your entries here.
-
-### Denoising
-
-- Add your entries here.
-
-## File formats
-
-- Add your entries here.
-
-### USD
-
-- Add your entries here.
-
-## File transfer
-
-- Add your entries here.
-
-## Job schedulers
-
-- Add your entries here.
-
-## Package managers
-
-- Add your entries here.
-
-### Environment Manager
-
-- Add your entries here.
-
-## Asset managers
-
-- Add your entries here.
-
-## Production managers
-
-- Add your entries here.
-
-## Content validation
-
-- Add your entries here.
-
-## Docker images
-
-- Add your entries here.
-
-### Misc
-
-- Add your entries here.
-
-## Plugins
-
-- Add your entries here.
-
-## IDE
-
-### PyCharm
-
-- Add your entries here.
-
-### SublimeText
-
-- Add your entries here.
-
-### vim
-
-- Add your entries here.
-
-### VSCode
-
-- Add your entries here.
-
-### VSCodium
-
-- Add your entries here.
-
-### vscode.dev
-
-- Add your entries here.
-
-## Databases
-
-### Graph
-
-- Add your entries here.
-
-### Relational
-
-- Add your entries here.
-
-### Document-based
-
-- Add your entries here.
-
-## Monitoring Web Services
-
-- Add your entries here.
-
-## Communities
-
-- Add your entries here.
-
-## Resources / Tutorials
-
-- Add your entries here.
-
-## Free music for showreel
-
-- Add your entries here.
+- Add technical blogs, SIGGRAPH resources, ASWF projects, forums, and documentation hubs here.
